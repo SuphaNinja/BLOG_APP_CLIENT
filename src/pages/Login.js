@@ -18,7 +18,7 @@ export default function Login() {
     });
 
     const login = useMutation({
-        mutationFn: (formData) => axiosInstance.post("/login", formData),
+        mutationFn: (formData) => axiosInstance.post("/test", formData),
         onSuccess: (data) => {
             setFormData({
                 email: "",
