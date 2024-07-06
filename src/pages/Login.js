@@ -8,8 +8,6 @@ import { Input } from "src/components/ui/input";
 import { Button } from "src/components/ui/button";
 import { Label } from "src/components/ui/label";
 
-
-
 export default function Login() {
 
     const navigate = useNavigate()
@@ -22,7 +20,6 @@ export default function Login() {
     const login = useMutation({
         mutationFn: (formData) => axiosInstance.post("/login", formData),
         onSuccess: (data) => {
-            console.log(data)
             setFormData({
                 email: "",
                 password: ""
@@ -33,8 +30,7 @@ export default function Login() {
                 setTimeout(() => {
                     navigate("/")
                     window.location.reload();
-
-                }, 2000);   
+                }, 2000);
             }
         }
     });
