@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5050', 
+    baseURL: 'https://blog-app-server-sable.vercel.app', 
     headers: {
         'x-access-token': localStorage.getItem("token"),
     },
