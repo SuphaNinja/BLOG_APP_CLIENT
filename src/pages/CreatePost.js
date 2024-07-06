@@ -110,8 +110,8 @@ export default function CreatePost() {
                 />
             </div>
             <Button type="submit" className="mt-auto col-span-2 md:col-span-1">Create Post!</Button>
-            {createPost.isSuccess && <p className="p-4 col-span-2 text-xl text-center bg-green-500 font-semibold">{createPost.data.data.success}</p>}
-            {createPost.isError && <p className="p-4 col-span-2 text-xl text-center bg-red-500 font-semibold">{createPost.data.data.error}</p>}
+            {createPost.isSuccess && <p className="p-4 col-span-2 text-xl text-center bg-green-500 font-semibold">{createPost.data?.data?.success}</p>}
+            {createPost.isError && <p className="p-4 col-span-2 text-xl text-center bg-red-500 font-semibold">{createPost.data?.data?.error}</p>}
         </form>
     )
 }
