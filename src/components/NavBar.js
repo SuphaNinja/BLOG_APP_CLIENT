@@ -49,7 +49,7 @@ export default function NavBar() {
                 </div>
                 <div className="w-1/3 flex justify-center md:justify-start">
                 <Button asChild>
-                    <Link to="/" className="text-4xl">UptodAIt</Link>
+                    <Link to="/" className="text-6xl">AI News</Link>
                 </Button>
                 </div>
                 <div className="w-1/3 hidden md:flex gap-4 justify-end">
