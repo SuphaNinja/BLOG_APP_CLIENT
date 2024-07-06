@@ -36,7 +36,7 @@ export default function CreatePost() {
     };
 
     const createPost = useMutation({
-        mutationFn: (data) => axiosInstance.post("http://localhost:5050/create-post", data),
+        mutationFn: (data) => axiosInstance.post("/create-post", data),
         onSuccess: (response) => {
             console.log("Post created successfully:", response.data);
         },

@@ -30,7 +30,7 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
     })
 
     const commentOnPost = useMutation({
-        mutationFn: (data) => axiosInstance.post("http://localhost:5050/comment-post", commentData),
+        mutationFn: (data) => axiosInstance.post("/comment-post", commentData),
         onSuccess: (data) => {
             if(data?.data?.success) {
                 queryClient.invalidateQueries(["post"])

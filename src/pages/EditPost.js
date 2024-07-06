@@ -27,7 +27,7 @@ export default function EditPost() {
     const queryClient = useQueryClient();
 
     const updatePost = useMutation({
-        mutationFn: (data) => axiosInstance.post("http://localhost:5050/edit-post", data),
+        mutationFn: (data) => axiosInstance.post("/edit-post", data),
     })
 
     const handleFileChange = (event) => {
