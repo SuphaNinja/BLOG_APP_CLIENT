@@ -30,7 +30,7 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
     })
 
     const commentOnPost = useMutation({
-        mutationFn: (data) => axiosInstance.post("/comment-post", commentData),
+        mutationFn: () => axiosInstance.post("/comment-post", commentData),
         onSuccess: (data) => {
             if(data?.data?.success) {
                 queryClient.invalidateQueries(["post"])
@@ -60,22 +60,7 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
         });
     }, [postId])
 
-    if (post.isLoading) {
-        return (
-            <div className="flex items-center space-x-4">
-                <Skeleton className="h-12 w-12 rounded-full" />
-                <div className="space-y-2">
-                    <Skeleton className="h-4 w-[250px]" />
-                    <Skeleton className="h-4 w-[200px]" />
-                </div>
-            </div>
-        )
-    }
-
-
-    if (!postId) {
-        return null
-    } else {
+     
         return (
             <div className={`flex z-50 flex-col md border-t-4 md:border-l-4 border-slate-700 bg-default w-full h-[40vh] md:h-[90vh]`}>
                 <p className="font-semibold text-md md:text-xl text-center">{post?.data?.data?.post?.title}</p>
@@ -132,5 +117,5 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
 
             </div>
         )
-    }
+    
 }
