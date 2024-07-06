@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
 import axiosInstance from "../lib/axiosInstance"
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Input } from "src/components/ui/input";
 import { Button } from "src/components/ui/button";
 import { Label } from "src/components/ui/label";
@@ -27,15 +26,8 @@ export default function EditPost() {
 
     const queryClient = useQueryClient();
 
-
-
-
     const updatePost = useMutation({
-        mutationFn: (data) => axios.post("http://localhost:5050/edit-post", data, {
-            headers: {
-                "x-access-token": localStorage.getItem("token")
-            }
-        }),
+        mutationFn: (data) => axiosInstance.post("http://localhost:5050/edit-post", data),
     })
 
     const handleFileChange = (event) => {

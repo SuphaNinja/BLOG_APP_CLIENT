@@ -1,6 +1,5 @@
 import { useLayoutEffect, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import axiosInstance from "../lib/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -37,11 +36,7 @@ export default function CreatePost() {
     };
 
     const createPost = useMutation({
-        mutationFn: (data) => axios.post("http://localhost:5050/create-post", data, {
-            headers: {
-                "x-access-token": localStorage.getItem("token")
-            }
-        }),
+        mutationFn: (data) => axiosInstance.post("http://localhost:5050/create-post", data),
         onSuccess: (response) => {
             console.log("Post created successfully:", response.data);
         },

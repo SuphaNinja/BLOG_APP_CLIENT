@@ -1,9 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axiosInstance from "../lib/axiosInstance";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import { Button } from "./ui/button";
@@ -12,7 +10,6 @@ import { Label } from "./ui/label";
 import { Skeleton } from "./ui/skeleton";
 
 export default function ViewPost({ postId, setIsVeiwingComments, isViewingComments }) {
-
 
     const queryClient = useQueryClient();
 
@@ -33,11 +30,7 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
     })
 
     const commentOnPost = useMutation({
-        mutationFn: (data) => axios.post("http://localhost:5050/comment-post", commentData, {
-            headers: {
-                "x-access-token": localStorage.getItem("token")
-            }
-        }),
+        mutationFn: (data) => axiosInstance.post("http://localhost:5050/comment-post", commentData),
         onSuccess: (data) => {
             if(data?.data?.success) {
                 queryClient.invalidateQueries(["post"])
