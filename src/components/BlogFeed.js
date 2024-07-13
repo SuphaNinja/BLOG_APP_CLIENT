@@ -1,24 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axiosInstance from "../lib/axiosInstance";
 import { useState, useRef, useEffect } from "react";
-import { BeakerIcon, HeartIcon } from '@heroicons/react/24/outline'
+import { HeartIcon } from '@heroicons/react/24/outline'
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { debounce } from "lodash";
 
-
-
-
-
-export default function BlogFeed({ post, setClickedPostId, clickedPostId, setIsVeiwingComments, isViewingComments }) {
-
-   
+export default function BlogFeed({ post, setClickedPostId, setIsVeiwingComments, isViewingComments }) {
     const queryClient = useQueryClient();
-
-    const handleViewPost = () => {
-        setClickedPostId(post.id === clickedPostId ? null : post.id);
-    };
 
     const likePost = useMutation({
         mutationFn: () => axiosInstance.post("/like-post", { post }),
@@ -37,7 +26,6 @@ export default function BlogFeed({ post, setClickedPostId, clickedPostId, setIsV
         mutationFn: (postId) => axiosInstance.post("/delete-post", { postId }),
         onSuccess: () => {
             queryClient.invalidateQueries(["posts"])
-
         }
     });
 
@@ -46,7 +34,6 @@ export default function BlogFeed({ post, setClickedPostId, clickedPostId, setIsV
         setTimeout(() => {
             queryClient.invalidateQueries(["posts"]);
         }, 50);
-        console.log(postId)
     };
 
     const currentUser = useQuery({
@@ -115,7 +102,7 @@ export default function BlogFeed({ post, setClickedPostId, clickedPostId, setIsV
             }
             if (post.image.length > 0) {
                 post.image.forEach(image => {
-                    newImageSrcList.push("http://localhost:5050" + image.filePath);
+                    newImageSrcList.push("http://:5050" + image.filePath);
                 });
             }
 
@@ -124,7 +111,6 @@ export default function BlogFeed({ post, setClickedPostId, clickedPostId, setIsV
     }, [post]);
 
     const [transitioning, setTransitioning] = useState(false);
-
     const [imageIndex, setImageIndex] = useState(0);
 
     const prevImageIndex = () => {
@@ -157,7 +143,6 @@ export default function BlogFeed({ post, setClickedPostId, clickedPostId, setIsV
         }, 500);
     };
 
-
     return (
         <div ref={blogRef} className="h-full max-h-screen md:max-h-[88vh]  flex flex-col items-center">
             <div className={`md:w-5/6 w-full hover:brightness-90  md:rounded-xl border-b-2 h-full md:h-[88vh]  md:overflow-hidden md:flex-col`}>
@@ -187,10 +172,9 @@ export default function BlogFeed({ post, setClickedPostId, clickedPostId, setIsV
                             className="z-10 h-full w-1/3 hover:bg-slate-500/30 transition-colors absolute top-0 right-0">
                         </button>
                     }
-
                 </div>
                 <div className="md:flex-col md:flex w-full md:h-3/6 ">
-                    <h2 className="text-center font-semibold md:text-xl underline">{post.title}</h2> 
+                    <h2 className="text-center font-semibold md:text-xl underline">{post.title}</h2>
                     <p className="px-1 md:px-4 overflow-y-auto max-h-[40vh] text-sm  md:mt-4 ">{post.description}</p>
                     <div className="flex  items-center  p-2 justify-between">
                         <div className="flex  text-center flex-col gap-2">
@@ -233,7 +217,6 @@ export default function BlogFeed({ post, setClickedPostId, clickedPostId, setIsV
                             </div>
                         }
                     </div>
-
                 </div>
             </div>
         </div>

@@ -15,8 +15,7 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
 
     const post = useQuery({
         queryKey: ["post", postId],
-        queryFn: () => axiosInstance.post("/get-post", { postId }),
-        enabled: !!postId, 
+        queryFn: () => axiosInstance.post("/get-post", { postId } ),
     });
 
     const [commentData, setCommentData] = useState({
@@ -39,6 +38,8 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
                     comment: "",
                     postId: postId
                 });
+            } else {
+                toast.success("Error adding comment!")
             }
         }
 
@@ -58,7 +59,10 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
             comment: "",
             postId: postId
         });
+        queryClient.invalidateQueries({queryKey: ["post", postId]})
     }, [postId])
+
+    
 
      
         return (
@@ -66,6 +70,7 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
                 <p className="font-semibold text-md md:text-xl text-center">{post?.data?.data?.post?.title}</p>
                 <div className="h-full flex flex-col">
                     <div className="flex justify-between mx-6">
+                        <button onClick={()=> console.log(post)}>test</button>
                         <p className="md:text-xl text-sm font-semibold text-center underline">
                             Comments
                             <span className="ml-2">({post.data?.data?.post?.comments.length})</span>
@@ -109,12 +114,10 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
                                     Comment!
                                 </Button>
                             </div>
-                           
                         }
                         {commentOnPost.data?.data?.error && <p className="text-center bg-red-500 font-semibold mt-1">{commentOnPost.data.data.error}</p>}
                     </div> 
                 </div>
-
             </div>
         )
     

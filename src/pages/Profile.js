@@ -105,7 +105,6 @@ export default function Profile() {
 
     return (
         <div>
-            <button className="ml-4" onClick={() => console.log(currentUser)}>user</button>
             <div className="w-full md:mt-0 mt-16 flex" >
                 <div className=" md:mx-24 md:p-8 border-2  md:rounded-xl md:my-24  flex flex-col w-full ">
                     <div className="flex flex-col md:flex-row items-center shadow-xl justify-between md:px-24 ">
@@ -139,12 +138,6 @@ export default function Profile() {
                                             Notifications
                                         </Button>
                                     }
-                                    <Button
-                                        variant="link"
-                                        onClick={() => setActiveComponent('posts')}
-                                        className={` transition-all hover:underline ${activeComponent === 'posts' ? "  font-semibold underline" : ""}`}>
-                                        Posts
-                                    </Button>
                                 </div>
                             </div>
                         </div>

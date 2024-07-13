@@ -58,7 +58,6 @@ export default function Login() {
     return (
         <form onSubmit={handleSubmit} className="grid grid-cols-2 md:mx-auto md:w-1/3 gap-2 md:mt-24 md:border-2 p-4 rounded-md">
             <p className="text-center text-2xl col-span-2 mt-24 md:mt-0">Login</p>
-            <button onClick={() => console.log(test)}>console the test</button>
             <div className="col-span-2">
                 <Label htmlFor="email">Email:</Label>
                 <Input

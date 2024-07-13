@@ -5,7 +5,6 @@ import { useState } from "react";
 import ViewPost from "../components/ViewPost";
 import { Skeleton } from "src/components/ui/skeleton";
 
-
 export default function Home() {
     const [isViewingComments, setIsVeiwingComments] = useState(false);
     const [clickedPostId, setClickedPostId] = useState();
