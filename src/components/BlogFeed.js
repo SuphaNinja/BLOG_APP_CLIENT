@@ -8,18 +8,28 @@ import { Button } from "./ui/button";
 
 export default function BlogFeed({ post, setClickedPostId, setIsVeiwingComments, isViewingComments }) {
     const queryClient = useQueryClient();
+    const preventLike = 1;
+    const preventMultipleErrors = 2;
 
     const likePost = useMutation({
         mutationFn: () => axiosInstance.post("/like-post", { post }),
         onSuccess: () => {
             queryClient.invalidateQueries(["post"])
-            if (currentUser.data.data.error && !toast.isActive("1")) {
-                toast(`${currentUser.data.data.error}`, {toastId: "1"})
-            } else if (!toast.isActive("2")) {  
-                toast(`${isLiked(post, currentUser?.data?.data?.success) ? "Unliked" : "Liked"} post!`,{ toastId: "2" })
+            if (currentUser.data.data.error && !toast.isActive(preventMultipleErrors)) {
+                toast(`${currentUser.data.data.error}`, { toastId: preventMultipleErrors })
+            } else if (!toast.isActive(preventLike)) {  
+                toast(`${isLiked(post, currentUser?.data?.data?.success) ? "Unliked" : "Liked"} post!`, { toastId: preventLike })
             };
         }
     });
+
+    const handleLikePost = () => {
+        if (!toast.isActive(preventLike)) {
+            likePost.mutate()
+        } else if (!toast.isActive(preventMultipleErrors)) {
+            toast(("You must wait before liking/unliking the post."), { toastId: preventMultipleErrors })
+        }
+    }
 
     const deletePost = useMutation({
         mutationFn: (postId) => axiosInstance.post("/delete-post", { postId }),
@@ -189,7 +199,8 @@ export default function BlogFeed({ post, setClickedPostId, setIsVeiwingComments,
                             <div className="flex items-center gap-2">
                                 <button
                                     className="flex md:items-center md:justify-center "
-                                    onClick={() => likePost.mutate()}>
+                                    onClick={likePost}
+                                >
                                     {!isLiked(post, currentUser.data.data.success) ?
                                         <div className="flex"> <HeartIcon width={35} />{post.likes.length > 0 ? (post.likes.length) : null}</div>
                                         :
