@@ -199,7 +199,7 @@ export default function BlogFeed({ post, setClickedPostId, setIsVeiwingComments,
                             <div className="flex items-center gap-2">
                                 <button
                                     className="flex md:items-center md:justify-center "
-                                    onClick={likePost}
+                                    onClick={handleLikePost}
                                 >
                                     {!isLiked(post, currentUser.data.data.success) ?
                                         <div className="flex"> <HeartIcon width={35} />{post.likes.length > 0 ? (post.likes.length) : null}</div>
