@@ -7,7 +7,6 @@ import Comment from "./Comment";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { Skeleton } from "./ui/skeleton";
 
 export default function ViewPost({ postId, setIsVeiwingComments, isViewingComments }) {
 
@@ -26,7 +25,7 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
     const user = useQuery({
         queryKey: ["user"],
         queryFn: () => axiosInstance.get("/get-current-user")
-    })
+    });
 
     const commentOnPost = useMutation({
         mutationFn: () => axiosInstance.post("/comment-post", commentData),
@@ -61,16 +60,12 @@ export default function ViewPost({ postId, setIsVeiwingComments, isViewingCommen
         });
         queryClient.invalidateQueries({queryKey: ["post", postId]})
     }, [postId])
-
-    
-
      
         return (
             <div className={`flex z-50 flex-col md border-t-4 md:border-l-4 border-slate-700 bg-default w-full h-[40vh] md:h-[90vh]`}>
                 <p className="font-semibold text-md md:text-xl text-center">{post?.data?.data?.post?.title}</p>
                 <div className="h-full flex flex-col">
                     <div className="flex justify-between mx-6">
-                        <button onClick={()=> console.log(post)}>test</button>
                         <p className="md:text-xl text-sm font-semibold text-center underline">
                             Comments
                             <span className="ml-2">({post.data?.data?.post?.comments.length})</span>

@@ -12,7 +12,7 @@ export default function EditPost() {
     const { postId } = useParams();
 
     const post = useQuery({
-        queryKey: ["post"],
+        queryKey: ["post", postId],
         queryFn: () => axiosInstance.post("/get-post", { postId })
     });
 
@@ -110,7 +110,7 @@ export default function EditPost() {
 
 
 
-    if (post.isLoading) { return (<div>Loading...</div>) };
+    if (post.isLoading) { return (<div>Loading... </div>) };
     if (post.isSuccess) {
         return (
             <div className="flex flex-col md:h-screen  md:mx-80">

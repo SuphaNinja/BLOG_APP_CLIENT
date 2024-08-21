@@ -102,7 +102,7 @@ export default function BlogFeed({ post, setClickedPostId, setIsVeiwingComments,
             }
             if (post.image.length > 0) {
                 post.image.forEach(image => {
-                    newImageSrcList.push("http://:5050" + image.filePath);
+                    newImageSrcList.push("https://blog-app-server-gray.vercel.app" + image.filePath);
                 });
             }
 
