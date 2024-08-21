@@ -13,11 +13,10 @@ export default function BlogFeed({ post, setClickedPostId, setIsVeiwingComments,
         mutationFn: () => axiosInstance.post("/like-post", { post }),
         onSuccess: () => {
             queryClient.invalidateQueries(["post"])
-
-            if (currentUser.data.data.error) {
-                toast(`${currentUser.data.data.error}`)
-            } else {
-                toast(`${isLiked(post, currentUser?.data?.data?.success) ? "Unliked" : "Liked"} post!`)
+            if (currentUser.data.data.error && !toast.isActive("1")) {
+                toast(`${currentUser.data.data.error}`, {toastId: "1"})
+            } else if (!toast.isActive("2")) {
+                toast(`${isLiked(post, currentUser?.data?.data?.success) ? "Unliked" : "Liked"} post!`{ toastId: "2" })
             };
         }
     });
